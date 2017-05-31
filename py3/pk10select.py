@@ -11,9 +11,16 @@ charset='utf8mb4'
 try:
     #获取会话指针
     with connection.cursor() as cursor:
+        #删除语句
+        # sql = "delete from shuju where shijian like '%2017-05-31%'";
         #创建sql语句
         # sql = "select `shijian`,`qishu`,`haoma` from shuju where `id` is not null"
-        sql = "select `shijian`,`qishu`,`haoma` from shuju where `qishu`= ' 619127'"
+        # sql = "select `shijian`,`qishu`,`haoma` from shuju where `qishu`= ' 619127'"
+        sql = "SELECT `shijian`,`qishu`,`haoma` FROM shuju WHERE shijian like '%2017-05-30%' AND 'id' is not null"
+        
+        #按开奖期数排序
+        # sql = "SELECT `shijian`,`qishu`,`haoma` FROM shuju order by qishu asc"
+
         #执行sql语句
         count = cursor.execute(sql)
         print(count)
@@ -22,5 +29,9 @@ try:
         # print(result)
         for value in result:
             print(value)
+
+        sql = "SELECT * FROM shuju WHERE qishu = ' 620738'"
+        count = cursor.execute(sql)
+        
 finally:
     connection.close()

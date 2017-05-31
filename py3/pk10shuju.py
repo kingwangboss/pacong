@@ -32,7 +32,7 @@ tab = listtb[0]
 for tr in tab.findAll('tr'):  
     for td in tr.findAll('td')[1:2]:  
         # print(td.getText())
-        qishu.append(td.getText())
+        qishu.append(td.getText().strip())
 for tr in tab.findAll('tr'):  
     for td in tr.findAll('td')[0:1]:  
         # print(td.getText())
