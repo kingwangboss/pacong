@@ -4,7 +4,7 @@ from urllib.request import urlopen
 from urllib.request import Request
 from bs4 import BeautifulSoup
 
-resp = urlopen("https://dc5678.com/index.php?c=content&a=list&catid=9&day=2017-05-31").read().decode("utf-8")
+resp = urlopen("https://dc5678.com/index.php?c=content&a=list&catid=9&day=2017-05-30").read().decode("utf-8")
 soup = BeautifulSoup(resp,"html.parser")
 i = 0
 str = ""
