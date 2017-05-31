@@ -4,30 +4,41 @@ from urllib.request import urlopen
 from urllib.request import Request
 from bs4 import BeautifulSoup
 
-url = "https://dc5678.com/index.php?c=content&a=list&catid=2"
-req = Request(url)
-req.add_header('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36')
-resp = urlopen(req).read().decode("utf-8")
+resp = urlopen("https://dc5678.com/index.php?c=content&a=list&catid=9&day=2017-05-31").read().decode("utf-8")
 soup = BeautifulSoup(resp,"html.parser")
+i = 0
+str = ""
+listspan = soup.findAll("span",title=re.compile("^.+"))
+listtb = soup.findAll("tbody")
 
-nowQishu = soup.findAll("em")[0].getText()
-nextQishu = soup.findAll("em")[6].getText()
-
-num = soup.findAll("span",title=re.compile("^.+"))
-
-nowNumArr = list()
-
-for span in num:
-    nowNumArr.append(span["title"])
-numList = ['01','02','03','04','05','06','07','08','09','10',]
-nowNumArr.pop(0)
-for x in nowNumArr:
-    numList.remove(x)
-nowNumArr.insert(0,numList[0])
-nowNum = " ".join(nowNumArr)
-print(nowNum)
-
-
-print("当前开奖号码：" + nowNum)
-print("当前开奖期数：" + nowQishu)
-print("下一期开奖期数：" + nextQishu)
+kaijiang = list()
+shijian = list()
+qishu = list()
+for title in listspan:
+    # print(title["title"]),
+    if i > 9:
+        # print(str)
+        kaijiang.append(str)
+        str = title["title"]
+        i = 1
+    else:
+        i+=1
+        if str :
+            str = str + ' ' + title["title"]
+        else:
+            str = title["title"]
+# print(listtd)
+tab = listtb[0]
+for tr in tab.findAll('tr'):  
+    for td in tr.findAll('td')[1:2]:  
+        # print(td.getText())
+        qishu.append(td.getText().strip())
+for tr in tab.findAll('tr'):  
+    for td in tr.findAll('td')[0:1]:  
+        # print(td.getText())
+        shijian.append(td.getText())
+# for tb in listtr:
+    # print(tr)
+print('最新开奖号码:' + kaijiang[0])
+print('最新开奖时间:' + shijian[0])
+print('最新开奖期数:' + qishu[0])
