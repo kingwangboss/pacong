@@ -16,7 +16,7 @@ try:
         #创建sql语句
         # sql = "select `shijian`,`qishu`,`haoma` from shuju where `id` is not null"
         # sql = "select `shijian`,`qishu`,`haoma` from shuju where `qishu`= ' 619127'"
-        sql = "SELECT `shijian`,`qishu`,`haoma` FROM shuju WHERE shijian like '%2017-05-31%' AND 'id' is not null"
+        sql = "SELECT `shijian`,`qishu`,`haoma` FROM shuju WHERE shijian like '%2017-06-05%' AND 'id' is not null"
         
         #按开奖期数排序
         # sql = "SELECT `shijian`,`qishu`,`haoma` FROM shuju order by qishu asc"
